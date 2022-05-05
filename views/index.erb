@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= @title %></title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+  </head>
+  
+  <body onContextmenu="return false">
+
+  <div class="container">
+    <div class="row">
+      <!-- 編集 -->
+      <div class="one-half column">
+        <form id="edit" onsubmit="return false;">
+
+          <label for="character">キャラクター選択</label>
+          <select class="u-full-width" id="character" onchange="updateImage();">
+            <option value="yuzuko">ゆずこ</option>
+            <option value="yukari">縁</option>
+            <option value="yui">唯</option>
+          </select>  
+
+          <label for="message">メッセージ</label>
+          <input class="u-full-width" type="text" placeholder="6文字以内がおすすめ" id="message">
+
+        </form>
+      </div>
+
+      <!-- プレビュー -->
+      <div id="preview" class="one-half column">
+          <label for="character">プレビュー</label>
+          <span class="guard"></span>
+          <img id="preview-img" src="<%= @img %>"/>
+          <label id="preview-msg"></label>
+      </div>
+    </div>  
+
+    <form class="save">
+      <input class="download" type="button" value="&#xf0c7; 画像として保存" onclick="downloadImage(); return false;"/>
+    </form>
+    <form class="twitter">
+      <% if @oauth == nil then %>
+      <input class="login_twitter" type="button" value="&#xf099; Twitterでログイン" onclick="loginTwitter();"/>
+      <% else %>
+      <div class="twitter">
+      <input class="share_twitter" type="button" value="&#xf099; @<%= @oauth %> で共有" onclick="uploadTwitter(); return false;"/>
+      <input class="logout_twitter" type="button" value="&#xf00d; @<%= @oauth %> ログアウト" onclick="logoutTwitter();"/>
+      </div>
+      <% end %>
+    </form>
+  </div>
+  
+  <script src="js/notie.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+ruby '3.1.2'
+
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'foreman'
+gem 'rmagick'
+gem 'twitter'
+gem 'omniauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-twitter'
+gem 'clockwork'
+gem 'puma'
