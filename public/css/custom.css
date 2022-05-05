@@ -1,6 +1,7 @@
 @font-face {
-  font-family: 'YasashisaGothic';
-  src: url('../font/YasashisaGothic.ttf') format('truetype');
+  font-family: 'やさしさゴシック';
+  src: url('https://cdn.leafscape.be/Yasashisa/YasashisaGothic_web.woff2')
+       format("woff2");
 }
 
 html, body {
@@ -16,17 +17,7 @@ input[type=button]{
   margin: 0
 }
 input[type=text], select{
-  font-family: 'YasashisaGothic';
-}
-input.login_twitter, input.share_twitter {
-  background-color: #00aced;
-  color: #fff;
-  border-color: #00aced;
-}
-input.login_twitter:hover, input.share_twitter:hover {
-  background-color: #00a1dd;
-  color: #f9f9f9;
-  border-color: #00a1dd;
+  font-family: 'やさしさゴシック';
 }
 input.logout_twitter {
   background-color: #db4a39;
@@ -45,8 +36,8 @@ label {
 
 #preview-img {
   width: 95%;
-  max-width: 150px;
-  max-height: 150px;
+  width: 150px;
+  height: 150px;
   margin: 0 0 0 0;
   border: 5px #dddddd solid;
 }
@@ -60,23 +51,3 @@ div.preview {
   position: relative;
   display: block;
 }
-
-#preview-msg {
-  font-family: 'YasashisaGothic';
-  white-space: nowrap;
-
-  position: relative;
-  width: 100%;
-  max-width: 150px;
-  margin: 0 5px 0px 5px;
-  text-align: center;
-}
-
-
-div.twitter input {
-  padding: 0 16px 0 16px;
-  margin: 0 8px 32px 0;
-}
-
-
-    

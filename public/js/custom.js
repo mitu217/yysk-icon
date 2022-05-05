@@ -28,38 +28,80 @@ window.onload = function() {
 
 /// 画像の更新
 function updateImage() {
-  img = document.getElementById("preview-img");
-  select_index = document.getElementById("character").selectedIndex;
-  file_nama = document.getElementById("character").options[select_index].value;
-  img.src = 'images/' + file_nama + '_origin.png';
+  loadImage("preview-img");
 }
 
 // メッセージの更新
 function updateMessage() {
   var message = document.getElementById("message");
-  var label = document.getElementById("preview-msg");
-  var size = document.getElementById("preview-img").width * 0.111;
-
-  label.innerText = message.value;
-  label.style.fontSize = size + "pt";
-  label.style.top = -(document.getElementById("preview-img").width + 4) + "px"; 
-
-  if (message.value.length != 0) {
-    enabled_btn(document.getElementById("download"));
-    enabled_btn(document.getElementById("share_twitter"));
-  } else {
-    disabled_btn(document.getElementById("download"));
-    disabled_btn(document.getElementById("share_twitter"));
-  }
+  drawText("preview-img", message);
 }
 
 /// ボタンの無効化
 function disabled_btn(button) {
 
 }
+
 /// ボタンの有効化
 function enabled_btn (button) {
 
+}
+
+//キャンバスに画像を描画する
+function loadImage(id)
+{
+  var select_index = document.getElementById("character").selectedIndex;
+  var character_nama = document.getElementById("character").options[select_index].value;
+
+	//画像を読み込んでImageオブジェクトを作成する
+	var image = new Image();
+	image.src = 'images/' + character_nama + '_origin.png';
+	image.onload = (function () {
+		//画像ロードが完了してからキャンバスの準備をする
+		var canvas = document.getElementById(id);
+		var ctx = canvas.getContext('2d');
+		//キャンバスのサイズを画像サイズに合わせる
+		canvas.width = image.width;
+		canvas.height = image.height;
+		//キャンバスに画像を描画（開始位置0,0）
+		ctx.drawImage(image, 0, 0);
+	});
+}
+
+//キャンバスに文字を描く
+function drawText(canvas_id, text)
+{
+  var select_index = document.getElementById("character").selectedIndex;
+  var character_nama = document.getElementById("character").options[select_index].value;
+
+	//画像を読み込んでImageオブジェクトを作成する
+	var image = new Image();
+	image.src = 'images/' + character_nama + '_origin.png';
+	image.onload = (function () {
+		//画像ロードが完了してからキャンバスの準備をする
+		var canvas = document.getElementById(canvas_id);
+		var ctx = canvas.getContext('2d');
+		//キャンバスのサイズを画像サイズに合わせる
+		canvas.width = image.width;
+		canvas.height = image.height;
+		//キャンバスに画像を描画（開始位置0,0）
+		ctx.drawImage(image, 0, 0);
+
+    var canvas = document.getElementById(canvas_id);
+    var ctx = canvas.getContext('2d');
+  
+    //文字のスタイルを指定
+    ctx.font = 'bold 54pt "やさしさゴシック", serif';
+    ctx.fontWeight = 'bold' 
+    ctx.fillStyle = '#404040';
+    //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
+    ctx.textBaseline = 'center';
+    ctx.textAlign = 'center';
+    //座標を指定して文字を描く（座標は画像の中心に）
+    var x = (canvas.width / 2);
+    var y = (canvas.height / 4.5);
+    ctx.fillText(text.value, x, y);
+  })
 }
 
 // 画像のダウンロード
@@ -67,25 +109,13 @@ function downloadImage(d) {
   if (message.value.length == 0) {
     notie.alert(3, 'メッセージを入力してください', 1);
   } else {
-    var contact_form_contents = {
-      character : document.getElementById("character").value,
-      message : document.getElementById("message").value
-    };
+    var select_index = document.getElementById("character").selectedIndex;
+    var character_nama = document.getElementById("character").options[select_index].value;
 
-    $.ajax({
-      type: 'POST',
-      url: '/download',
-      cache: false,
-      data: contact_form_contents, 
-      success: function(html) {
-        var a = document.createElement('a');
-        a.href = html;
-        a.download = document.getElementById("character").value + ".png";
-        a.click();        
-      },
-      error: function() {
-        notie.alert(3, "画像を生成できませんでした", 1);
-      }
-    });
+    var canvas = document.getElementById("preview-img");
+    let link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = character_nama + ".png";
+    link.click();
   }
 }

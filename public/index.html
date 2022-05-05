@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= @title %></title>
+    <title>ゆゆ式アイコンツール</title>
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
@@ -15,11 +15,9 @@
     
   </head>
   
-  <body onContextmenu="return false">
-
   <div class="container">
     <div class="row">
-      <!-- 編集 -->
+
       <div class="one-half column">
         <form id="edit" onsubmit="return false;">
 
@@ -36,12 +34,9 @@
         </form>
       </div>
 
-      <!-- プレビュー -->
       <div id="preview" class="one-half column">
-          <label for="character">プレビュー</label>
-          <span class="guard"></span>
-          <img id="preview-img" src="<%= @img %>"/>
-          <label id="preview-msg"></label>
+        <label for="character">プレビュー</label>
+        <canvas id="preview-img"></canvas>
       </div>
     </div>  
 
@@ -51,5 +46,8 @@
   </div>
   
   <script src="js/notie.js"></script>
+  <script>
+    updateImage();
+  </script>
   </body>
 </html>
