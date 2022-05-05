@@ -17,7 +17,6 @@ class InsertMessage
 
     begin
       draw.annotate(img, 0, 0, 0, -175, message) do
-        self.font = './public/font/YasashisaGothic.ttf' 
         self.fill = 'black'
         self.stroke = 'transparent'
         self.pointsize = 80

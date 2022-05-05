@@ -62,42 +62,6 @@ function enabled_btn (button) {
 
 }
 
-/// Twitterログイン
-function loginTwitter() {
-  location.href = "/auth/twitter";
-}
-
-/// Twitterログアウト
-function logoutTwitter() {
-  location.href = "/session_clear";
-}
-
-// ツイッターへの投稿
-function uploadTwitter(){
-  if (message.value.length == 0) {
-    notie.alert(3, 'メッセージを入力してください', 1);
-  } else { 
-    var contact_form_contents = {
-      character : document.getElementById("character").value,
-      message : document.getElementById("message").value
-    };
-
-    $.ajax({
-      type: 'POST',
-      url: '/upload_image',
-      cache: false,
-      data: contact_form_contents,
-      success: function(html) {
-        notie.alert(1, "Twitterに投稿しました", 1);
-      },
-      error: function() {
-        notie.alert(3, "Twitterに投稿できませんでした", 1);
-      }
-    });
-  }
-  return false;
-}
-
 // 画像のダウンロード
 function downloadImage(d) {
   if (message.value.length == 0) {

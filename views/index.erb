@@ -48,16 +48,6 @@
     <form class="save">
       <input class="download" type="button" value="&#xf0c7; 画像として保存" onclick="downloadImage(); return false;"/>
     </form>
-    <form class="twitter">
-      <% if @oauth == nil then %>
-      <input class="login_twitter" type="button" value="&#xf099; Twitterでログイン" onclick="loginTwitter();"/>
-      <% else %>
-      <div class="twitter">
-      <input class="share_twitter" type="button" value="&#xf099; @<%= @oauth %> で共有" onclick="uploadTwitter(); return false;"/>
-      <input class="logout_twitter" type="button" value="&#xf00d; @<%= @oauth %> ログアウト" onclick="logoutTwitter();"/>
-      </div>
-      <% end %>
-    </form>
   </div>
   
   <script src="js/notie.js"></script>
